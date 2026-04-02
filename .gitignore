@@ -1,0 +1,8 @@
+node_modules/
+.expo/
+.expo-shared/
+android/
+ios/
+*.log
+.DS_Store
+pnpm-lock.yaml
