@@ -1,8 +1,10 @@
 import {
   Alert,
   Linking,
+  Platform,
   Pressable,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -211,8 +213,10 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   header: {
     backgroundColor: "#16a34a",
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingTop:
+      Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) + 12 : 20,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   backText: { color: "white", fontSize: 16, fontWeight: "600" },
   title: {

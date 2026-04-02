@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import type { UniversityTab } from "../types";
 
 type Props = { onBack: () => void };
@@ -215,8 +223,10 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   header: {
     backgroundColor: "#1d4ed8",
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingTop:
+      Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) + 12 : 20,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   backButton: { marginBottom: 10 },
   backText: { color: "white", fontSize: 16, fontWeight: "600" },

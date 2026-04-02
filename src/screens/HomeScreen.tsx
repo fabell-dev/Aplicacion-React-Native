@@ -40,7 +40,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
         <View style={styles.headerIconWrap}>
           <Text style={styles.headerIcon}>🎓</Text>
         </View>
-        <Text style={styles.headerTitle}>Orientacion Profesional UCI</Text>
+        <Text style={styles.headerTitle}>Orientacion ICI</Text>
         <Text style={styles.headerSubtitle}>
           Tu guia hacia la Ingenieria en Ciencias Informaticas
         </Text>

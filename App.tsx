@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, View } from "react-native";
-import { useState } from "react";
+import {
+  BackHandler,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  ToastAndroid,
+  View,
+} from "react-native";
+import { useEffect, useRef, useState } from "react";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { UniversidadScreen } from "./src/screens/UniversidadScreen";
 import { CarreraScreen } from "./src/screens/CarreraScreen";
@@ -10,6 +17,37 @@ import type { View as AppView } from "./src/types";
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>("home");
+  const lastBackPressRef = useRef(0);
+
+  useEffect(() => {
+    if (Platform.OS !== "android") {
+      return;
+    }
+
+    const subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        if (currentView !== "home") {
+          setCurrentView("home");
+          return true;
+        }
+
+        const now = Date.now();
+        if (now - lastBackPressRef.current < 2000) {
+          return false;
+        }
+
+        lastBackPressRef.current = now;
+        ToastAndroid.show(
+          "Pulsa atras otra vez para salir",
+          ToastAndroid.SHORT,
+        );
+        return true;
+      },
+    );
+
+    return () => subscription.remove();
+  }, [currentView]);
 
   const renderView = () => {
     switch (currentView) {

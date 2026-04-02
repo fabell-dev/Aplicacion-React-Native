@@ -5,12 +5,10 @@
     "moduleResolution": "Bundler",
     "jsx": "react-jsx",
     "strict": true,
-    "types": ["react", "react-native"],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "noEmit": true
   },
-  "include": ["App.tsx", "src/**/*.ts", "src/**/*.tsx"],
-  "extends": "expo/tsconfig.base"
+  "include": ["App.tsx", "src/**/*.ts", "src/**/*.tsx"]
 }

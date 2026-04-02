@@ -1,4 +1,4 @@
-# Aplicacion de orientacion profesional - React Native
+# Orientacion ICI - React Native
 
 Migracion inicial desde la version web (Vite/React) a una app movil con Expo y React Native.
 
@@ -32,3 +32,7 @@ Luego abre en:
 ## Nota
 
 El enlace de WhatsApp de mentorias esta como placeholder y debe actualizarse en `src/screens/MentoriasScreen.tsx`.
+
+## Retomar mas tarde
+
+Consulta `RETOMAR.md` para estado actual, builds recientes y pasos de continuidad.

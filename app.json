@@ -1,25 +1,27 @@
 {
   "expo": {
-    "name": "Orientacion Profesional UCI",
+    "name": "Orientacion ICI",
     "slug": "orientacion-profesional-uci",
     "version": "1.0.0",
+    "icon": "./assets/icon.png",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2563eb"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alessandra.app"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#2563eb"
       },
-      "package": "u.c.i"
+      "package": "com.alessandra.app"
     },
     "web": {
       "bundler": "metro"
