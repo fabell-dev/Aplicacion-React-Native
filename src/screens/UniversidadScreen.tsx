@@ -1,5 +1,7 @@
 import { useState } from "react";
 import {
+  ImageBackground,
+  Linking,
   Platform,
   Pressable,
   ScrollView,
@@ -111,29 +113,26 @@ function InfoContent() {
 }
 
 function VidaContent() {
-  const features = [
-    [
-      "🏠",
-      "Residencia Estudiantil",
-      "Alojamiento para estudiantes de otras provincias.",
-    ],
-    [
-      "⚽",
-      "Deportes y Recreacion",
-      "Instalaciones deportivas y espacios de recreacion.",
-    ],
-    [
-      "🎭",
-      "Actividades Culturales",
-      "Eventos y grupos para el desarrollo artistico.",
-    ],
-    [
-      "📚",
-      "Bibliotecas y Laboratorios",
-      "Espacios de estudio con técnologia actual.",
-    ],
-    ["🍽️", "Comedores", "Servicio de alimentación con menús variados."],
-  ];
+  const [selectedSection, setSelectedSection] = useState<CampusSection | null>(
+    null,
+  );
+
+  const handleOpenMaps = async () => {
+    const url = "https://maps.app.goo.gl/wPHrmM27sqoiM9cx5";
+    const canOpen = await Linking.canOpenURL(url);
+    if (canOpen) {
+      await Linking.openURL(url);
+    }
+  };
+
+  if (selectedSection !== null) {
+    return (
+      <CampusDetail
+        section={selectedSection}
+        onBack={() => setSelectedSection(null)}
+      />
+    );
+  }
 
   return (
     <>
@@ -142,19 +141,187 @@ function VidaContent() {
           Vida en el Campus
         </Text>
         <Text style={styles.cardText}>
-          La UCI ofrece una experiencia universitaria completa.
+          Descubre todo lo que nuestra universidad tiene para ofrecer. Toca cada
+          seccion para conocer mas detalles.
         </Text>
       </View>
-      {features.map(([emoji, title, text]) => (
-        <View key={title} style={styles.featureCard}>
-          <Text style={styles.featureEmoji}>{emoji}</Text>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.featureTitle}>{title}</Text>
-            <Text style={styles.featureText}>{text}</Text>
-          </View>
-        </View>
-      ))}
+
+      <Pressable style={styles.mapsButton} onPress={handleOpenMaps}>
+        <Text style={styles.mapsIcon}>📍</Text>
+        <Text style={styles.mapsButtonText}>Ver UCI en Google Maps</Text>
+      </Pressable>
+
+      <SectionCard
+        title="Vida en el Campus"
+        description="Conoce nuestra ciudad tecnologica de avanzada con mas de 268 hectareas."
+        emoji="🏛️"
+        onPress={() => setSelectedSection("campus")}
+      />
+      <SectionCard
+        title="Residencia Estudiantil"
+        description="Un espacio educativo y socializante para estudiantes y profesores."
+        emoji="🏠"
+        onPress={() => setSelectedSection("residencia")}
+      />
+      <SectionCard
+        title="Deportes y Recreacion"
+        description="Instalaciones y actividades para promover estilos de vida saludable."
+        emoji="⚽"
+        onPress={() => setSelectedSection("deportes")}
+      />
+      <SectionCard
+        title="Actividades Culturales"
+        description="Fuerte movimiento artistico con reconocimientos a nivel nacional."
+        emoji="🎭"
+        onPress={() => setSelectedSection("cultura")}
+      />
+      <SectionCard
+        title="Comedores"
+        description="Servicios de alimentacion con menus variados y nutritivos."
+        emoji="🍽️"
+        onPress={() => setSelectedSection("comedores")}
+      />
     </>
+  );
+}
+
+type CampusSection =
+  | "campus"
+  | "residencia"
+  | "deportes"
+  | "cultura"
+  | "comedores";
+
+const sectionImages: Record<CampusSection, any> = {
+  campus: require("../../assets/vida.jpg"),
+  residencia: require("../../assets/residencia.jpg"),
+  deportes: require("../../assets/deporte.jpg"),
+  cultura: require("../../assets/cultura.jpg"),
+  comedores: require("../../assets/comedor.jpg"),
+};
+
+function SectionCard({
+  title,
+  description,
+  emoji,
+  onPress,
+}: {
+  title: string;
+  description: string;
+  emoji: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable style={styles.sectionCard} onPress={onPress}>
+      <Text style={styles.sectionEmoji}>{emoji}</Text>
+      <View style={styles.sectionTextWrap}>
+        <Text style={styles.sectionTitle}>{title}</Text>
+        <Text style={styles.sectionDescription}>{description}</Text>
+      </View>
+      <Text style={styles.sectionArrow}>›</Text>
+    </Pressable>
+  );
+}
+
+function CampusDetail({
+  section,
+  onBack,
+}: {
+  section: CampusSection;
+  onBack: () => void;
+}) {
+  const detail = getCampusDetail(section);
+
+  return (
+    <View style={styles.detailScreen}>
+      <ImageBackground
+        source={sectionImages[section]}
+        style={styles.detailHero}
+        imageStyle={styles.detailHeroImage}
+      >
+        <View style={styles.detailHeroOverlay} />
+        <Pressable onPress={onBack} style={styles.detailHeroBackButton}>
+          <Text style={styles.detailHeroBackText}>‹ Volver</Text>
+        </Pressable>
+        <Text style={styles.detailHeroTitle}>{detail.title}</Text>
+      </ImageBackground>
+
+      <View style={styles.detailDescriptionCard}>
+        {detail.paragraphs.map((paragraph) => (
+          <Text key={paragraph} style={styles.detailParagraph}>
+            {paragraph}
+          </Text>
+        ))}
+        {detail.extra !== undefined ? (
+          <View style={styles.detailExtraBox}>{detail.extra}</View>
+        ) : null}
+      </View>
+    </View>
+  );
+}
+
+function getCampusDetail(section: CampusSection) {
+  switch (section) {
+    case "campus":
+      return {
+        title: "Vida en el Campus",
+        paragraphs: [
+          "Nuestro campus constituye una ciudad tecnologica de avanzada distribuida en 268 hectareas, con una potente red de datos y una amplia infraestructura que garantiza la realizacion de todos los procesos sustantivos de la Universidad.",
+          "Contamos con 6 edificios que acogen 150 aulas, 30 salones de conferencia y mas de 200 laboratorios destinados a las actividades docente-productivas de las diferentes facultades.",
+          "Todos los espacios cuentan con puntos de acceso a la red de datos, sistema de television por cable, climatizacion mediante aire acondicionado o ventiladores, comunicacion telefonica y agua potable.",
+        ],
+      };
+    case "residencia":
+      return {
+        title: "Residencia Estudiantil",
+        paragraphs: [
+          "La residencia ocupa un lugar importante dentro del area de la Universidad. Sus edificios y apartamentos dan la bienvenida a estudiantes y profesores, y funcionan como un espacio socialmente educativo y socializante.",
+          "Dentro del campus se ofrecen otros servicios como cafeterias, pizzerias, correos, bancos, barberia, peluqueria, salon de belleza, areas deportivas, tienda y lavanderia.",
+          "La labor educativa en este contexto incluye a profesores, lideres estudiantiles y academicos para contribuir a la formacion integral de los alumnos.",
+        ],
+      };
+    case "deportes":
+      return {
+        title: "Deportes y Recreacion",
+        paragraphs: [
+          "El deporte permite promover acciones practicas para consolidar el desarrollo integral de estudiantes, profesores y trabajadores, fomentando estilos de vida saludable.",
+          "La Universidad dispone de infraestructura para futsal, balonmano, baloncesto, voleibol, beisbol, atletismo, futbol, taekwondo, karate, kenpo, judo y lucha libre entre otras disciplinas.",
+          "Uno de los momentos mas esperados son los Juegos Deportivos Mella, ademas de eventos como Marhabana, Maracuba, la Carrera Terry Fox, Dia Olimpico y el Maraton 10 de Octubre.",
+        ],
+      };
+    case "cultura":
+      return {
+        title: "Actividades Culturales",
+        paragraphs: [
+          "La institucion se caracteriza por un fuerte movimiento artistico integrado por estudiantes y trabajadores, con reconocimientos a nivel nacional.",
+          "La actividad cultural se organiza desde la Vicerrectoria de Extension Universitaria, con apoyo de organizaciones juveniles y estudiantiles.",
+          "El Centro Cultural Wifredo Lam dispone de aulas para teatro, danza, musica y artes plasticas, ademas de sala de video, galeria, libreria, complejo recreativo, plazas y teatro.",
+        ],
+      };
+    case "comedores":
+      return {
+        title: "Comedores",
+        paragraphs: [
+          "La UCI cuenta con tres complejos comedor que brindan desayuno, almuerzo y comida a estudiantes y profesores.",
+        ],
+        extra: (
+          <View style={styles.scheduleBox}>
+            <Text style={styles.scheduleTitle}>Horarios</Text>
+            <ScheduleRow label="Desayuno" value="8:00 am - 8:50 am" />
+            <ScheduleRow label="Almuerzo" value="12:00 pm - 1:50 pm" />
+            <ScheduleRow label="Comida" value="6:00 pm - 7:30 pm" />
+          </View>
+        ),
+      };
+  }
+}
+
+function ScheduleRow({ label, value }: { label: string; value: string }) {
+  return (
+    <View style={styles.scheduleRow}>
+      <Text style={styles.scheduleLabel}>{label}:</Text>
+      <Text style={styles.scheduleValue}>{value}</Text>
+    </View>
   );
 }
 
@@ -285,4 +452,93 @@ const styles = StyleSheet.create({
   testimonialName: { color: "#111827", fontWeight: "700", fontSize: 16 },
   testimonialYear: { color: "#6b7280", fontSize: 13, marginBottom: 6 },
   testimonialText: { color: "#374151", fontStyle: "italic", lineHeight: 20 },
+  sectionCard: {
+    backgroundColor: "#fff",
+    borderRadius: 14,
+    padding: 14,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  sectionEmoji: { fontSize: 26 },
+  sectionTextWrap: { flex: 1 },
+  sectionTitle: { color: "#111827", fontSize: 16, fontWeight: "700" },
+  sectionDescription: { color: "#4b5563", fontSize: 13, marginTop: 2 },
+  sectionArrow: { color: "#9ca3af", fontSize: 28 },
+  mapsButton: {
+    backgroundColor: "#10b981",
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
+  mapsIcon: { fontSize: 18 },
+  mapsButtonText: { color: "white", fontSize: 15, fontWeight: "700" },
+  detailScreen: {
+    marginHorizontal: -16,
+    marginTop: -16,
+  },
+  detailHero: {
+    minHeight: 220,
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 20,
+  },
+  detailHeroImage: {
+    resizeMode: "cover",
+  },
+  detailHeroOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(17, 24, 39, 0.5)",
+  },
+  detailHeroBackButton: {
+    alignSelf: "flex-start",
+    backgroundColor: "rgba(255,255,255,0.2)",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+  },
+  detailHeroBackText: { color: "white", fontSize: 15, fontWeight: "600" },
+  detailHeroTitle: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "700",
+  },
+  detailDescriptionCard: {
+    marginTop: -12,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: "#fff",
+    paddingVertical: 16,
+    paddingHorizontal: 22,
+    gap: 12,
+  },
+  detailParagraph: { color: "#4b5563", lineHeight: 22, marginHorizontal: 6 },
+  detailExtraBox: {
+    backgroundColor: "#eef2ff",
+    borderRadius: 14,
+    padding: 14,
+    marginTop: 6,
+  },
+  scheduleBox: {
+    backgroundColor: "#eef2ff",
+    borderRadius: 14,
+    padding: 14,
+    marginTop: 6,
+  },
+  scheduleTitle: { color: "#1e3a8a", fontWeight: "700", marginBottom: 8 },
+  scheduleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: "#c7d2fe",
+  },
+  scheduleLabel: { color: "#374151" },
+  scheduleValue: { color: "#4338ca", fontWeight: "600" },
 });
