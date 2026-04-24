@@ -1,9 +1,19 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import type { View as AppView } from "../types";
 
 type HomeProps = {
   onNavigate: (
-    view: Extract<AppView, "universidad" | "carrera" | "test" | "mentorias">,
+    view: Extract<
+      AppView,
+      "universidad" | "carrera" | "test" | "mentorias" | "faq"
+    >,
   ) => void;
 };
 
@@ -36,23 +46,27 @@ function NavCard({ title, description, emoji, color, onPress }: NavCardProps) {
 export function HomeScreen({ onNavigate }: HomeProps) {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.headerIconWrap}>
-          <Text style={styles.headerIcon}>🎓</Text>
+      <ImageBackground
+        source={require("../../assets/portada.jpeg")}
+        style={styles.header}
+        imageStyle={styles.headerImage}
+      >
+        <View style={styles.headerOverlay} />
+        <View style={styles.headerContent}>
+          <Text style={styles.headerTitle}>Orientacion ICI</Text>
+          <Text style={styles.headerSubtitle}>
+            Tu guía hacia la Ingeniería en Ciencias Informáticas
+          </Text>
         </View>
-        <Text style={styles.headerTitle}>Orientacion ICI</Text>
-        <Text style={styles.headerSubtitle}>
-          Tu guia hacia la Ingenieria en Ciencias Informaticas
-        </Text>
-      </View>
+      </ImageBackground>
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Que es esta aplicacion?</Text>
+          <Text style={styles.sectionTitle}>¿Que es esta aplicación?</Text>
           <Text style={styles.bodyText}>
-            Esta aplicacion esta disenada para orientar a estudiantes de
-            ensenanzas precedentes a la universidad sobre la carrera de
-            Ingenieria en Ciencias Informaticas en la UCI, Cuba.
+            Esta aplicación esta diseñada para orientar a estudiantes de
+            enseñanzas precedentes a la universidad sobre la carrera de
+            Ingeniería en Ciencias Informáticas en la UCI, Cuba.
           </Text>
         </View>
 
@@ -66,7 +80,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
 
         <NavCard
           title="Carrera de ICI"
-          description="Informacion sobre asignaturas, cursos y mas"
+          description="Información sobre asignaturas, cursos y más"
           emoji="💻"
           color="#4f46e5"
           onPress={() => onNavigate("carrera")}
@@ -74,24 +88,32 @@ export function HomeScreen({ onNavigate }: HomeProps) {
 
         <NavCard
           title="Test Vocacional"
-          description="Evalua tu aptitud para la carrera"
+          description="Evalúa tu aptitud para la carrera"
           emoji="🧠"
           color="#7c3aed"
           onPress={() => onNavigate("test")}
         />
 
         <NavCard
-          title="Mentorias Electronicas"
+          title="Mentorias Electrónicas"
           description="Conecta con estudiantes universitarios"
           emoji="🤝"
           color="#16a34a"
           onPress={() => onNavigate("mentorias")}
         />
+
+        <NavCard
+          title="Preguntas Frecuentes"
+          description="Resuelve tus dudas sobre la carrera"
+          emoji="❓"
+          color="#ea580c"
+          onPress={() => onNavigate("faq")}
+        />
       </ScrollView>
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>
-          Universidad de las Ciencias Informaticas, Cuba
+          Universidad de las Ciencias Informáticas, Cuba
         </Text>
       </View>
     </View>
@@ -101,9 +123,19 @@ export function HomeScreen({ onNavigate }: HomeProps) {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   header: {
-    backgroundColor: "#1d4ed8",
+    minHeight: 280,
+    justifyContent: "center",
+  },
+  headerImage: {
+    resizeMode: "cover",
+  },
+  headerOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(17, 24, 39, 0.45)",
+  },
+  headerContent: {
     paddingHorizontal: 20,
-    paddingVertical: 24,
+    paddingVertical: 28,
     alignItems: "center",
   },
   headerIconWrap: {

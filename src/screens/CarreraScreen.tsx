@@ -12,23 +12,23 @@ type Props = { onBack: () => void };
 
 const areas = [
   "Desarrollo de Software",
-  "Ingenieria de Software",
+  "Ingeniería de Software",
   "Bases de Datos",
   "Redes y Telecomunicaciones",
   "Inteligencia Artificial",
-  "Seguridad Informatica",
+  "Seguridad Informática",
   "Arquitectura de Software",
 ];
 
 const opportunities = [
   [
     "Desarrollador de Software",
-    "Creacion de aplicaciones web, moviles y de escritorio",
+    "Creacion de aplicaciones web, móviles y de escritorio",
   ],
-  ["Arquitecto de Software", "Diseno de soluciones tecnologicas escalables"],
-  ["Ingeniero de Datos", "Gestion y analisis de informacion"],
-  ["Especialista en Seguridad", "Proteccion de sistemas y datos empresariales"],
-  ["Consultor TI", "Asesoramiento en transformacion digital"],
+  ["Arquitecto de Software", "Diseño de soluciones tecnológicas escalables"],
+  ["Ingeniero de Datos", "Gestión y análisis de información"],
+  ["Especialista en Seguridad", "Protección de sistemas y datos empresariales"],
+  ["Consultor TI", "Asesoramiento en transformación digital"],
 ];
 
 export function CarreraScreen({ onBack }: Props) {
@@ -54,12 +54,12 @@ export function CarreraScreen({ onBack }: Props) {
         <View style={styles.softCard}>
           <Text style={styles.softTitle}>Duracion</Text>
           <Text style={styles.softText}>
-            5 anos de formacion intensiva combinando teoria y practica.
+            4 años de formacion intensiva combinando teoría y práctica.
           </Text>
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Areas de Formacion</Text>
+          <Text style={styles.cardTitle}>Áreas de Formación</Text>
           {areas.map((area) => (
             <View key={area} style={styles.rowItem}>
               <Text style={styles.dot}>•</Text>
@@ -69,43 +69,43 @@ export function CarreraScreen({ onBack }: Props) {
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Asignaturas por Ano</Text>
+          <Text style={styles.cardTitle}>Asignaturas por Año</Text>
           <SubjectCard
-            year="1er Ano"
+            year="1er Año"
             subjects={[
-              "Matematica",
-              "Programacion",
-              "Introduccion a la Ingenieria",
-              "Ingles Tecnico",
+              "Matemática Discreta",
+              "Álgebra",
+              "Introduccion a la Programación",
+              "Introducción a la Ingeniería",
             ]}
             color="#dbeafe"
           />
           <SubjectCard
-            year="2do Ano"
+            year="2do Año"
             subjects={[
               "Estructuras de Datos",
-              "POO",
-              "Bases de Datos I",
-              "Matematica Computacional",
+              "Programación Orientada a Objetos",
+              "Bases de Datos",
+              "Cálculo",
             ]}
             color="#e0e7ff"
           />
           <SubjectCard
-            year="3er Ano"
+            year="3er Año"
             subjects={[
-              "Ingenieria de Software",
+              "Ingeniería de Software",
               "Desarrollo Web",
               "Sistemas Operativos",
-              "Redes",
+              "Redes de Computadoras",
             ]}
             color="#ede9fe"
           />
           <SubjectCard
-            year="4to-5to Ano"
+            year="4to Año"
             subjects={[
-              "Arquitectura de Software",
-              "IA",
-              "Seguridad Informatica",
+              "Estudios Sociales",
+              "Aprendizaje Automático",
+              "Redes Computacionales",
               "Proyecto de Desarrollo",
             ]}
             color="#f3e8ff"
@@ -115,12 +115,12 @@ export function CarreraScreen({ onBack }: Props) {
         <View style={styles.softCard}>
           <Text style={styles.softTitle}>Habilidades</Text>
           {[
-            "Programacion en multiples lenguajes",
-            "Diseno de sistemas complejos",
+            "Programación en múltiples lenguajes",
+            "Diseño de sistemas complejos",
             "Trabajo en equipo",
-            "Resolucion de problemas",
-            "Gestion de proyectos",
-            "Pensamiento analitico",
+            "Resolución de problemas",
+            "Gestión de proyectos",
+            "Pensamiento análitico",
           ].map((skill) => (
             <View key={skill} style={styles.skillItem}>
               <Text style={styles.skillDot}>•</Text>

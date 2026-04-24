@@ -13,6 +13,7 @@ import { UniversidadScreen } from "./src/screens/UniversidadScreen";
 import { CarreraScreen } from "./src/screens/CarreraScreen";
 import { TestVocacionalScreen } from "./src/screens/TestVocacionalScreen";
 import { MentoriasScreen } from "./src/screens/MentoriasScreen";
+import { FAQScreen } from "./src/screens/FAQScreen";
 import type { View as AppView } from "./src/types";
 
 export default function App() {
@@ -61,6 +62,8 @@ export default function App() {
         return <TestVocacionalScreen onBack={() => setCurrentView("home")} />;
       case "mentorias":
         return <MentoriasScreen onBack={() => setCurrentView("home")} />;
+      case "faq":
+        return <FAQScreen onBack={() => setCurrentView("home")} />;
       default:
         return <HomeScreen onNavigate={setCurrentView} />;
     }

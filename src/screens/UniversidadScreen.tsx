@@ -80,9 +80,9 @@ function InfoContent() {
           Sobre la UCI
         </Text>
         <Text style={styles.cardText}>
-          La Universidad de las Ciencias Informaticas (UCI) es una institucion
-          educativa cubana especializada en la formacion de profesionales en
-          tecnologias de la informacion y comunicaciones.
+          La Universidad de las Ciencias Informáticas (UCI) es una institución
+          educativa cubana especializada en la formación de profesionales en
+          técnologias de la información y comunicaciones.
         </Text>
         <Text style={[styles.cardText, { marginTop: 10 }]}>
           Fundada en 2002, es referente nacional e internacional.
@@ -94,7 +94,7 @@ function InfoContent() {
         <InfoItem label="Ubicacion" value="La Habana, Cuba" />
         <InfoItem label="Fundacion" value="2002" />
         <InfoItem label="Modelo" value="Universidad-Empresa" />
-        <InfoItem label="Especialidad" value="Ciencias Informaticas" />
+        <InfoItem label="Especialidad" value="Ciencias Informáticas" />
       </View>
 
       <View style={styles.card}>
@@ -102,8 +102,8 @@ function InfoContent() {
           Modelo Universidad-Empresa
         </Text>
         <Text style={styles.cardText}>
-          Combina estudio con produccion de software en proyectos reales desde
-          los primeros anos.
+          Combina estudio con producción de software en proyectos reales desde
+          los primeros años.
         </Text>
       </View>
     </>
@@ -130,9 +130,9 @@ function VidaContent() {
     [
       "📚",
       "Bibliotecas y Laboratorios",
-      "Espacios de estudio con tecnologia actual.",
+      "Espacios de estudio con técnologia actual.",
     ],
-    ["🍽️", "Comedores", "Servicio de alimentacion con menus variados."],
+    ["🍽️", "Comedores", "Servicio de alimentación con menús variados."],
   ];
 
   return (
@@ -162,25 +162,25 @@ function TestimoniosContent() {
   const data = [
     [
       "Maria Gonzalez",
-      "3er Ano",
-      "Experiencia unica en proyectos reales.",
+      "3er Año",
+      "Experiencia única en proyectos reales.",
       "#3b82f6",
     ],
     [
       "Carlos Rodriguez",
-      "4to Ano",
+      "4to Año",
       "Ambiente increible y aprendizaje continuo.",
       "#4f46e5",
     ],
     [
       "Ana Martinez",
-      "5to Ano",
-      "Preparacion para retos profesionales.",
+      "4to Año",
+      "Preparación para retos profesionales.",
       "#7c3aed",
     ],
     [
       "Jorge Lopez",
-      "2do Ano",
+      "2do Año",
       "Vida en campus activa y enriquecedora.",
       "#16a34a",
     ],

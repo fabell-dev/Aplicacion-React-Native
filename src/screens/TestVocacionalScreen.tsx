@@ -21,24 +21,24 @@ type Question = {
 const questions: Question[] = [
   {
     id: 1,
-    question: "Que es un algoritmo?",
+    question: "¿Que es un algoritmo?",
     options: [
       "Un tipo de computadora",
       "Un conjunto de instrucciones para resolver un problema",
-      "Un lenguaje de programacion",
+      "Un lenguaje de programación",
       "Un sistema operativo",
     ],
     correctAnswer: 1,
   },
   {
     id: 2,
-    question: "Cual de estos es un lenguaje de programacion?",
+    question: "¿Cual de estos es un lenguaje de programación?",
     options: ["HTML", "Python", "CSS", "MySQL"],
     correctAnswer: 1,
   },
   {
     id: 3,
-    question: "Que significa CPU?",
+    question: "¿Que significa CPU?",
     options: [
       "Computer Personal Unit",
       "Central Processing Unit",
@@ -49,10 +49,10 @@ const questions: Question[] = [
   },
   {
     id: 4,
-    question: "Que es una base de datos?",
+    question: "¿Que es una base de datos?",
     options: [
-      "Un programa de diseno grafico",
-      "Un sistema organizado para almacenar informacion",
+      "Un programa de diseno gráfico",
+      "Un sistema organizado para almacenar información",
       "Un tipo de red social",
       "Un navegador web",
     ],
@@ -60,10 +60,10 @@ const questions: Question[] = [
   },
   {
     id: 5,
-    question: "Que hace un desarrollador de software?",
+    question: "¿Que hace un desarrollador de software?",
     options: [
       "Repara computadoras",
-      "Disena paginas web solamente",
+      "Diseña paginas web solamente",
       "Crea programas y aplicaciones",
       "Vende software",
     ],
@@ -71,10 +71,10 @@ const questions: Question[] = [
   },
   {
     id: 6,
-    question: "Que es un bug en programacion?",
+    question: "¿Que es un bug en programación?",
     options: [
       "Un insecto en la computadora",
-      "Un error en el codigo",
+      "Un error en el código",
       "Un tipo de virus",
       "Un comando especial",
     ],
@@ -82,7 +82,7 @@ const questions: Question[] = [
   },
   {
     id: 7,
-    question: "Que significa open source?",
+    question: "¿Que significa open source?",
     options: [
       "Software gratuito",
       "Software con codigo abierto que puede ser modificado",
@@ -93,20 +93,20 @@ const questions: Question[] = [
   },
   {
     id: 8,
-    question: "Que es la inteligencia artificial?",
+    question: "¿Que es la inteligencia artificial?",
     options: [
-      "Un tipo de computadora muy rapida",
+      "Un tipo de computadora muy rápida",
       "Sistemas que simulan inteligencia humana",
       "Un videojuego",
-      "Un lenguaje de programacion",
+      "Un lenguaje de programación",
     ],
     correctAnswer: 1,
   },
   {
     id: 9,
-    question: "Que es Git?",
+    question: "¿Que es Git?",
     options: [
-      "Un lenguaje de programacion",
+      "Un lenguaje de programación",
       "Un sistema de control de versiones",
       "Un editor de texto",
       "Un sistema operativo",
@@ -115,11 +115,11 @@ const questions: Question[] = [
   },
   {
     id: 10,
-    question: "Que es una API?",
+    question: "¿Que es una API?",
     options: [
       "Un tipo de computadora",
       "Una interfaz para que programas se comuniquen",
-      "Un lenguaje de programacion",
+      "Un lenguaje de programación",
       "Una red social",
     ],
     correctAnswer: 1,
@@ -159,7 +159,7 @@ export function TestVocacionalScreen({ onBack }: Props) {
         icon: "📚",
         message: "Tienes bases iniciales. Con estudio puedes avanzar rapido.",
         recommendation:
-          "Refuerza programacion y conceptos basicos de informatica.",
+          "Refuerza programacion y conceptos basicos de informática.",
       };
     }
     return {
@@ -168,7 +168,7 @@ export function TestVocacionalScreen({ onBack }: Props) {
       icon: "💪",
       message: "Aun puedes fortalecer muchas bases antes de iniciar.",
       recommendation:
-        "Empieza con fundamentos y usa las mentorias para orientarte.",
+        "Empieza con fundamentos y usa las mentorías para orientarte.",
     };
   }, [score]);
 
@@ -215,10 +215,10 @@ export function TestVocacionalScreen({ onBack }: Props) {
           </View>
 
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>Evaluacion</Text>
+            <Text style={styles.cardTitle}>Evaluación</Text>
             <Text style={styles.cardText}>{result.message}</Text>
             <View style={styles.recommendBox}>
-              <Text style={styles.recommendTitle}>Recomendacion</Text>
+              <Text style={styles.recommendTitle}>Recomendación</Text>
               <Text style={styles.recommendText}>{result.recommendation}</Text>
             </View>
           </View>

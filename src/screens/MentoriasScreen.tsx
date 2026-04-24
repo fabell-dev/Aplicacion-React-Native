@@ -33,7 +33,7 @@ export function MentoriasScreen({ onBack }: Props) {
         <Pressable onPress={onBack}>
           <Text style={styles.backText}>‹ Volver</Text>
         </Pressable>
-        <Text style={styles.title}>Mentorias Electronicas</Text>
+        <Text style={styles.title}>Mentorias Electrónicas</Text>
         <Text style={styles.subtitle}>
           Conecta con estudiantes universitarios
         </Text>
@@ -41,10 +41,10 @@ export function MentoriasScreen({ onBack }: Props) {
 
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>Que son las Mentorias?</Text>
+          <Text style={styles.cardTitle}>Que son las Mentorías?</Text>
           <Text style={styles.cardText}>
             Te permiten conectar con estudiantes de ICI para resolver dudas y
-            recibir orientacion.
+            recibir orientación.
           </Text>
         </View>
 
@@ -67,7 +67,7 @@ export function MentoriasScreen({ onBack }: Props) {
           />
           <Benefit
             title="Red de apoyo"
-            text="Conecta con futuros companeros y mentores."
+            text="Conecta con futuros compañeros y mentores."
             emoji="🤝"
           />
         </View>
@@ -77,12 +77,12 @@ export function MentoriasScreen({ onBack }: Props) {
           <Step
             number={1}
             title="Unete al grupo"
-            text="Usa el boton de WhatsApp para entrar a la comunidad."
+            text="Usa el botón de WhatsApp para entrar a la comunidad."
           />
           <Step
             number={2}
-            title="Presentate"
-            text="Cuenta quien eres y que te gustaria saber."
+            title="Preséntate"
+            text="Cuenta quien eres y que te gustaría saber."
           />
           <Step
             number={3}
@@ -95,26 +95,26 @@ export function MentoriasScreen({ onBack }: Props) {
           <Text style={styles.cardTitle}>Mentores</Text>
           <Mentor
             name="Pedro Sanchez"
-            year="5to Ano"
+            year="4to Año"
             specialty="Desarrollo Web"
             emoji="👨‍💻"
           />
           <Mentor
             name="Laura Diaz"
-            year="4to Ano"
+            year="4to Año"
             specialty="Inteligencia Artificial"
             emoji="👩‍💻"
           />
           <Mentor
             name="Miguel Torres"
-            year="3er Ano"
+            year="3er Año"
             specialty="Bases de Datos"
             emoji="👨‍💻"
           />
         </View>
 
         <View style={styles.ctaCard}>
-          <Text style={styles.ctaTitle}>Unete a la Comunidad</Text>
+          <Text style={styles.ctaTitle}>Únete a la Comunidad</Text>
           <Text style={styles.ctaText}>
             Accede al grupo y comienza a resolver tus dudas.
           </Text>
@@ -132,10 +132,10 @@ export function MentoriasScreen({ onBack }: Props) {
             ✓ Mantener conversaciones relacionadas con la carrera y la UCI
           </Text>
           <Text style={styles.rule}>
-            ✓ No compartas informacion personal sensible
+            ✓ No compartas información personal sensible
           </Text>
           <Text style={styles.rule}>
-            ✓ Se paciente, los mentores son voluntarios
+            ✓ Sé paciente, los mentores son voluntarios
           </Text>
         </View>
       </ScrollView>

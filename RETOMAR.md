@@ -82,7 +82,14 @@ eas build:view <build-id>
   - Conviene normalizar .gitignore y limpiar el indice cuando se haga una pasada de mantenimiento Git.
 - Opcional: migrar navegacion manual a React Navigation.
 
-## 7) Checklist rapido de regreso
+## 7) Incidente de seguridad
+
+- Se recibio alerta de una Google API Key detectada en dependencias instaladas dentro de node_modules.
+- La clave no aparece en el codigo fuente de la app; esta embebida en archivos de terceros que vinieron con la instalacion.
+- Accion recomendada ya: revocar o rotar la key en Google Cloud si sigue activa.
+- Si hace falta retomar este punto, revisar uso real de la key y reemplazarla solo si la app dependiera de ese servicio.
+
+## 8) Checklist rapido de regreso
 
 1. npm install
 2. npm run start y prueba en dispositivo
