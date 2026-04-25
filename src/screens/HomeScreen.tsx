@@ -6,6 +6,14 @@ import {
   Text,
   View,
 } from "react-native";
+import {
+  Building,
+  Laptop,
+  Brain,
+  Handshake,
+  CircleHelp,
+  ChevronRight,
+} from "lucide-react-native";
 import type { View as AppView } from "../types";
 
 type HomeProps = {
@@ -20,25 +28,31 @@ type HomeProps = {
 type NavCardProps = {
   title: string;
   description: string;
-  emoji: string;
+  icon: "building" | "laptop" | "brain" | "handshake" | "help";
   color: string;
   onPress: () => void;
 };
 
-function NavCard({ title, description, emoji, color, onPress }: NavCardProps) {
+function NavCard({ title, description, icon, color, onPress }: NavCardProps) {
+  const iconMap = {
+    building: <Building size={20} color="white" strokeWidth={2} />,
+    laptop: <Laptop size={20} color="white" strokeWidth={2} />,
+    brain: <Brain size={20} color="white" strokeWidth={2} />,
+    handshake: <Handshake size={20} color="white" strokeWidth={2} />,
+    help: <CircleHelp size={20} color="white" strokeWidth={2} />,
+  };
+
   return (
     <Pressable
       style={[styles.navCard, { backgroundColor: color }]}
       onPress={onPress}
     >
-      <View style={styles.navIconWrap}>
-        <Text style={styles.navIcon}>{emoji}</Text>
-      </View>
+      <View style={styles.navIconWrap}>{iconMap[icon]}</View>
       <View style={styles.navTextWrap}>
         <Text style={styles.navTitle}>{title}</Text>
         <Text style={styles.navDescription}>{description}</Text>
       </View>
-      <Text style={styles.navArrow}>›</Text>
+      <ChevronRight size={22} color="white" />
     </Pressable>
   );
 }
@@ -73,7 +87,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
         <NavCard
           title="Universidad UCI"
           description="Conoce la universidad, vida estudiantil y testimonios"
-          emoji="🏛️"
+          icon="building"
           color="#2563eb"
           onPress={() => onNavigate("universidad")}
         />
@@ -81,7 +95,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
         <NavCard
           title="Carrera de ICI"
           description="Información sobre asignaturas, cursos y más"
-          emoji="💻"
+          icon="laptop"
           color="#4f46e5"
           onPress={() => onNavigate("carrera")}
         />
@@ -89,7 +103,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
         <NavCard
           title="Test Vocacional"
           description="Evalúa tu aptitud para la carrera"
-          emoji="🧠"
+          icon="brain"
           color="#7c3aed"
           onPress={() => onNavigate("test")}
         />
@@ -97,7 +111,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
         <NavCard
           title="Mentorias Electrónicas"
           description="Conecta con estudiantes universitarios"
-          emoji="🤝"
+          icon="handshake"
           color="#16a34a"
           onPress={() => onNavigate("mentorias")}
         />
@@ -105,7 +119,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
         <NavCard
           title="Preguntas Frecuentes"
           description="Resuelve tus dudas sobre la carrera"
-          emoji="❓"
+          icon="help"
           color="#ea580c"
           onPress={() => onNavigate("faq")}
         />
@@ -192,7 +206,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginRight: 12,
   },
-  navIcon: { fontSize: 20 },
   navTextWrap: { flex: 1 },
   navTitle: {
     color: "white",
@@ -201,7 +214,6 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   navDescription: { color: "#eef2ff", fontSize: 13 },
-  navArrow: { color: "white", fontSize: 28, marginLeft: 8 },
   footer: {
     borderTopWidth: 1,
     borderTopColor: "#e5e7eb",

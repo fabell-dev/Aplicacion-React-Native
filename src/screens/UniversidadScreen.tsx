@@ -11,6 +11,7 @@ import {
   View,
 } from "react-native";
 import type { UniversityTab } from "../types";
+import { MapPin, Building, Home, Zap, Music, UtensilsCrossed } from "lucide-react-native";
 
 type Props = { onBack: () => void };
 
@@ -147,38 +148,38 @@ function VidaContent() {
       </View>
 
       <Pressable style={styles.mapsButton} onPress={handleOpenMaps}>
-        <Text style={styles.mapsIcon}>📍</Text>
+        <MapPin size={20} color="white" strokeWidth={2} />
         <Text style={styles.mapsButtonText}>Ver UCI en Google Maps</Text>
       </Pressable>
 
       <SectionCard
         title="Vida en el Campus"
         description="Conoce nuestra ciudad tecnologica de avanzada con mas de 268 hectareas."
-        emoji="🏛️"
+        icon="building"
         onPress={() => setSelectedSection("campus")}
       />
       <SectionCard
         title="Residencia Estudiantil"
         description="Un espacio educativo y socializante para estudiantes y profesores."
-        emoji="🏠"
+        icon="home"
         onPress={() => setSelectedSection("residencia")}
       />
       <SectionCard
         title="Deportes y Recreacion"
         description="Instalaciones y actividades para promover estilos de vida saludable."
-        emoji="⚽"
+        icon="zap"
         onPress={() => setSelectedSection("deportes")}
       />
       <SectionCard
         title="Actividades Culturales"
         description="Fuerte movimiento artistico con reconocimientos a nivel nacional."
-        emoji="🎭"
+        icon="music"
         onPress={() => setSelectedSection("cultura")}
       />
       <SectionCard
         title="Comedores"
         description="Servicios de alimentacion con menus variados y nutritivos."
-        emoji="🍽️"
+        icon="utensils"
         onPress={() => setSelectedSection("comedores")}
       />
     </>
@@ -203,17 +204,25 @@ const sectionImages: Record<CampusSection, any> = {
 function SectionCard({
   title,
   description,
-  emoji,
+  icon,
   onPress,
 }: {
   title: string;
   description: string;
-  emoji: string;
+  icon: "building" | "home" | "zap" | "music" | "utensils";
   onPress: () => void;
 }) {
+  const iconMap = {
+    building: <Building size={26} color="#111827" strokeWidth={1.5} />,
+    home: <Home size={26} color="#111827" strokeWidth={1.5} />,
+    zap: <Zap size={26} color="#111827" strokeWidth={1.5} />,
+    music: <Music size={26} color="#111827" strokeWidth={1.5} />,
+    utensils: <UtensilsCrossed size={26} color="#111827" strokeWidth={1.5} />,
+  };
+
   return (
     <Pressable style={styles.sectionCard} onPress={onPress}>
-      <Text style={styles.sectionEmoji}>{emoji}</Text>
+      <View style={styles.sectionIconContainer}>{iconMap[icon]}</View>
       <View style={styles.sectionTextWrap}>
         <Text style={styles.sectionTitle}>{title}</Text>
         <Text style={styles.sectionDescription}>{description}</Text>
@@ -460,7 +469,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
-  sectionEmoji: { fontSize: 26 },
+  sectionIconContainer: { justifyContent: "center", alignItems: "center" },
   sectionTextWrap: { flex: 1 },
   sectionTitle: { color: "#111827", fontSize: 16, fontWeight: "700" },
   sectionDescription: { color: "#4b5563", fontSize: 13, marginTop: 2 },
@@ -475,7 +484,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 10,
   },
-  mapsIcon: { fontSize: 18 },
   mapsButtonText: { color: "white", fontSize: 15, fontWeight: "700" },
   detailScreen: {
     marginHorizontal: -16,

@@ -9,6 +9,14 @@ import {
   Text,
   View,
 } from "react-native";
+import {
+  MessageCircle,
+  BookOpen,
+  Target,
+  Handshake,
+  User,
+  Check,
+} from "lucide-react-native";
 
 type Props = { onBack: () => void };
 
@@ -53,22 +61,22 @@ export function MentoriasScreen({ onBack }: Props) {
           <Benefit
             title="Respuestas en tiempo real"
             text="Haz preguntas y recibe respuestas de estudiantes actuales."
-            emoji="💬"
+            icon="chat"
           />
           <Benefit
             title="Experiencias reales"
             text="Conoce la vida universitaria de primera mano."
-            emoji="📖"
+            icon="book"
           />
           <Benefit
             title="Consejos utiles"
             text="Tips para prepararte mejor para la carrera."
-            emoji="🎯"
+            icon="target"
           />
           <Benefit
             title="Red de apoyo"
             text="Conecta con futuros compañeros y mentores."
-            emoji="🤝"
+            icon="network"
           />
         </View>
 
@@ -97,19 +105,19 @@ export function MentoriasScreen({ onBack }: Props) {
             name="Pedro Sanchez"
             year="4to Año"
             specialty="Desarrollo Web"
-            emoji="👨‍💻"
+            icon="user"
           />
           <Mentor
             name="Laura Diaz"
             year="4to Año"
             specialty="Inteligencia Artificial"
-            emoji="👩‍💻"
+            icon="user"
           />
           <Mentor
             name="Miguel Torres"
             year="3er Año"
             specialty="Bases de Datos"
-            emoji="👨‍💻"
+            icon="user"
           />
         </View>
 
@@ -127,16 +135,10 @@ export function MentoriasScreen({ onBack }: Props) {
 
         <View style={styles.rulesCard}>
           <Text style={styles.rulesTitle}>Normas de la Comunidad</Text>
-          <Text style={styles.rule}>✓ Respeta a todos los miembros</Text>
-          <Text style={styles.rule}>
-            ✓ Mantener conversaciones relacionadas con la carrera y la UCI
-          </Text>
-          <Text style={styles.rule}>
-            ✓ No compartas información personal sensible
-          </Text>
-          <Text style={styles.rule}>
-            ✓ Sé paciente, los mentores son voluntarios
-          </Text>
+          <RuleItem text="Respeta a todos los miembros" />
+          <RuleItem text="Mantener conversaciones relacionadas con la carrera y la UCI" />
+          <RuleItem text="No compartas información personal sensible" />
+          <RuleItem text="Sé paciente, los mentores son voluntarios" />
         </View>
       </ScrollView>
     </View>
@@ -146,15 +148,22 @@ export function MentoriasScreen({ onBack }: Props) {
 function Benefit({
   title,
   text,
-  emoji,
+  icon,
 }: {
   title: string;
   text: string;
-  emoji: string;
+  icon: "chat" | "book" | "target" | "network";
 }) {
+  const iconMap = {
+    chat: <MessageCircle size={20} color="#166534" strokeWidth={2} />,
+    book: <BookOpen size={20} color="#166534" strokeWidth={2} />,
+    target: <Target size={20} color="#166534" strokeWidth={2} />,
+    network: <Handshake size={20} color="#166534" strokeWidth={2} />,
+  };
+
   return (
     <View style={styles.itemRow}>
-      <Text style={styles.itemEmoji}>{emoji}</Text>
+      <View style={styles.itemIconWrap}>{iconMap[icon]}</View>
       <View style={{ flex: 1 }}>
         <Text style={styles.itemTitle}>{title}</Text>
         <Text style={styles.itemText}>{text}</Text>
@@ -189,22 +198,35 @@ function Mentor({
   name,
   year,
   specialty,
-  emoji,
+  icon,
 }: {
   name: string;
   year: string;
   specialty: string;
-  emoji: string;
+  icon: "user";
 }) {
+  const iconMap = {
+    user: <User size={20} color="#166534" strokeWidth={2} />,
+  };
+
   return (
     <View style={styles.mentorCard}>
-      <Text style={styles.mentorEmoji}>{emoji}</Text>
+      <View style={styles.mentorIconWrap}>{iconMap[icon]}</View>
       <View style={{ flex: 1 }}>
         <Text style={styles.itemTitle}>{name}</Text>
         <Text style={styles.itemText}>
           {year} - {specialty}
         </Text>
       </View>
+    </View>
+  );
+}
+
+function RuleItem({ text }: { text: string }) {
+  return (
+    <View style={styles.ruleRow}>
+      <Check size={16} color="#1e3a8a" strokeWidth={2.5} />
+      <Text style={styles.rule}>{text}</Text>
     </View>
   );
 }
@@ -244,7 +266,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   itemRow: { flexDirection: "row", gap: 10, marginBottom: 10 },
-  itemEmoji: { fontSize: 24 },
+  itemIconWrap: {
+    width: 28,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   itemTitle: { color: "#1f2937", fontWeight: "700" },
   itemText: { color: "#4b5563", fontSize: 13, marginTop: 2 },
   stepRow: { flexDirection: "row", gap: 10, marginBottom: 10 },
@@ -268,7 +294,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
-  mentorEmoji: { fontSize: 24 },
+  mentorIconWrap: {
+    width: 28,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   ctaCard: {
     backgroundColor: "#16a34a",
     borderRadius: 16,
@@ -299,5 +329,11 @@ const styles = StyleSheet.create({
     borderColor: "#bfdbfe",
   },
   rulesTitle: { color: "#1e40af", fontWeight: "700", marginBottom: 6 },
-  rule: { color: "#1e3a8a", fontSize: 13, marginBottom: 4 },
+  ruleRow: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 6,
+    marginBottom: 4,
+  },
+  rule: { color: "#1e3a8a", fontSize: 13, flex: 1 },
 });
