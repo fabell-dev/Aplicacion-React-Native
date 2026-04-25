@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Alert,
   ImageBackground,
   Linking,
   Platform,
@@ -142,11 +143,26 @@ function VidaContent() {
   );
 
   const handleOpenMaps = async () => {
-    const url = "https://maps.app.goo.gl/wPHrmM27sqoiM9cx5";
-    const canOpen = await Linking.canOpenURL(url);
-    if (canOpen) {
-      await Linking.openURL(url);
+    const query = encodeURIComponent(
+      "Universidad de las Ciencias Informaticas, La Habana, Cuba",
+    );
+    const urls = [
+      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      `geo:0,0?q=${query}`,
+    ];
+
+    for (const url of urls) {
+      const canOpen = await Linking.canOpenURL(url);
+      if (canOpen) {
+        await Linking.openURL(url);
+        return;
+      }
     }
+
+    Alert.alert(
+      "No se pudo abrir Maps",
+      "Intenta nuevamente cuando tengas una app de mapas disponible.",
+    );
   };
 
   if (selectedSection !== null) {
