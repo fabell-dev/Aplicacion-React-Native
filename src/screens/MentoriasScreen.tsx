@@ -101,24 +101,9 @@ export function MentoriasScreen({ onBack }: Props) {
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Mentores</Text>
-          <Mentor
-            name="Pedro Sanchez"
-            year="4to Año"
-            specialty="Desarrollo Web"
-            icon="user"
-          />
-          <Mentor
-            name="Laura Diaz"
-            year="4to Año"
-            specialty="Inteligencia Artificial"
-            icon="user"
-          />
-          <Mentor
-            name="Miguel Torres"
-            year="3er Año"
-            specialty="Bases de Datos"
-            icon="user"
-          />
+          <Mentor name="Pedro Sanchez" year="4to Año" icon="user" />
+          <Mentor name="Laura Diaz" year="4to Año" icon="user" />
+          <Mentor name="Miguel Torres" year="3er Año" icon="user" />
         </View>
 
         <View style={styles.ctaCard}>
@@ -197,12 +182,10 @@ function Step({
 function Mentor({
   name,
   year,
-  specialty,
   icon,
 }: {
   name: string;
   year: string;
-  specialty: string;
   icon: "user";
 }) {
   const iconMap = {
@@ -214,9 +197,7 @@ function Mentor({
       <View style={styles.mentorIconWrap}>{iconMap[icon]}</View>
       <View style={{ flex: 1 }}>
         <Text style={styles.itemTitle}>{name}</Text>
-        <Text style={styles.itemText}>
-          {year} - {specialty}
-        </Text>
+        <Text style={styles.itemText}>{year}</Text>
       </View>
     </View>
   );

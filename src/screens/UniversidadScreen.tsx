@@ -11,7 +11,14 @@ import {
   View,
 } from "react-native";
 import type { UniversityTab } from "../types";
-import { MapPin, Building, Home, Zap, Music, UtensilsCrossed } from "lucide-react-native";
+import {
+  MapPin,
+  Building,
+  Home,
+  Zap,
+  Music,
+  UtensilsCrossed,
+} from "lucide-react-native";
 
 type Props = { onBack: () => void };
 
@@ -422,7 +429,13 @@ const styles = StyleSheet.create({
   tabButtonActive: { borderBottomWidth: 2, borderBottomColor: "#2563eb" },
   tabText: { color: "#6b7280", fontSize: 13, fontWeight: "600" },
   tabTextActive: { color: "#2563eb" },
-  content: { padding: 16, gap: 12 },
+  content: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 0,
+    gap: 12,
+    flexGrow: 1,
+  },
   card: { backgroundColor: "#fff", borderRadius: 16, padding: 16 },
   cardTitle: { fontSize: 18, fontWeight: "700", marginBottom: 8 },
   cardText: { color: "#4b5563", fontSize: 15, lineHeight: 22 },
@@ -488,6 +501,7 @@ const styles = StyleSheet.create({
   detailScreen: {
     marginHorizontal: -16,
     marginTop: -16,
+    flexGrow: 1,
   },
   detailHero: {
     minHeight: 220,
@@ -518,14 +532,19 @@ const styles = StyleSheet.create({
   },
   detailDescriptionCard: {
     marginTop: -12,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     backgroundColor: "#fff",
     paddingVertical: 16,
     paddingHorizontal: 22,
     gap: 12,
+    flex: 1,
   },
-  detailParagraph: { color: "#4b5563", lineHeight: 22, marginHorizontal: 6 },
+  detailParagraph: {
+    color: "#4b5563",
+    lineHeight: 22,
+    marginHorizontal: 6,
+  },
   detailExtraBox: {
     backgroundColor: "#eef2ff",
     borderRadius: 14,
