@@ -17,18 +17,46 @@ import {
   User,
   Check,
 } from "lucide-react-native";
+import type { Mentor } from "../types";
 
-type Props = { onBack: () => void };
+type Props = {
+  onBack: () => void;
+  whatsappGroupLink: string;
+  mentores: Mentor[];
+};
 
-const whatsappGroupLink = "https://chat.whatsapp.com/tu-codigo-de-grupo";
+function formatAcademicYear(year: number): string {
+  if (year === 1) {
+    return "1er Año";
+  }
+  if (year === 2) {
+    return "2do Año";
+  }
+  if (year === 3) {
+    return "3er Año";
+  }
+  return `${year}to Año`;
+}
 
-export function MentoriasScreen({ onBack }: Props) {
+export function MentoriasScreen({
+  onBack,
+  whatsappGroupLink,
+  mentores,
+}: Props) {
   const handleJoinWhatsApp = async () => {
+    if (!whatsappGroupLink) {
+      Alert.alert(
+        "Enlace no disponible",
+        "Todavia no hay un enlace de WhatsApp configurado.",
+      );
+      return;
+    }
+
     const canOpen = await Linking.canOpenURL(whatsappGroupLink);
     if (!canOpen) {
       Alert.alert(
         "No se pudo abrir el enlace",
-        "Actualiza el enlace del grupo de WhatsApp.",
+        "Verifica el enlace guardado en Supabase.",
       );
       return;
     }
@@ -84,7 +112,7 @@ export function MentoriasScreen({ onBack }: Props) {
           <Text style={styles.cardTitle}>Como funciona?</Text>
           <Step
             number={1}
-            title="Unete al grupo"
+            title="Únete al grupo"
             text="Usa el botón de WhatsApp para entrar a la comunidad."
           />
           <Step
@@ -94,16 +122,21 @@ export function MentoriasScreen({ onBack }: Props) {
           />
           <Step
             number={3}
-            title="Interactua"
+            title="Interactúa"
             text="Participa, pregunta y aprende."
           />
         </View>
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Mentores</Text>
-          <Mentor name="Pedro Sanchez" year="4to Año" icon="user" />
-          <Mentor name="Laura Diaz" year="4to Año" icon="user" />
-          <Mentor name="Miguel Torres" year="3er Año" icon="user" />
+          {mentores.map((mentor) => (
+            <Mentor
+              key={`${mentor.nombre}-${mentor.anno_academico}`}
+              name={mentor.nombre}
+              year={formatAcademicYear(mentor.anno_academico)}
+              icon="user"
+            />
+          ))}
         </View>
 
         <View style={styles.ctaCard}>
@@ -111,7 +144,14 @@ export function MentoriasScreen({ onBack }: Props) {
           <Text style={styles.ctaText}>
             Accede al grupo y comienza a resolver tus dudas.
           </Text>
-          <Pressable style={styles.ctaButton} onPress={handleJoinWhatsApp}>
+          <Pressable
+            style={[
+              styles.ctaButton,
+              !whatsappGroupLink && styles.ctaButtonDisabled,
+            ]}
+            onPress={handleJoinWhatsApp}
+            disabled={!whatsappGroupLink}
+          >
             <Text style={styles.ctaButtonText}>
               Unirse al Grupo de WhatsApp
             </Text>
@@ -300,6 +340,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     width: "100%",
     alignItems: "center",
+  },
+  ctaButtonDisabled: {
+    opacity: 0.6,
   },
   ctaButtonText: { color: "#166534", fontWeight: "700" },
   rulesCard: {

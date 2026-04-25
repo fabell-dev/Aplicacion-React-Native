@@ -14,11 +14,41 @@ import { CarreraScreen } from "./src/screens/CarreraScreen";
 import { TestVocacionalScreen } from "./src/screens/TestVocacionalScreen";
 import { MentoriasScreen } from "./src/screens/MentoriasScreen";
 import { FAQScreen } from "./src/screens/FAQScreen";
-import type { View as AppView } from "./src/types";
+import type { AppContentData, View as AppView } from "./src/types";
+import {
+  FALLBACK_CONTENT,
+  loadContentFromCacheOrFallback,
+  refreshContentFromRemote,
+} from "./src/services/contentStore";
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>("home");
+  const [content, setContent] = useState<AppContentData>(FALLBACK_CONTENT);
   const lastBackPressRef = useRef(0);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const initializeContent = async () => {
+      const cachedOrFallback = await loadContentFromCacheOrFallback();
+      if (!isMounted) {
+        return;
+      }
+      setContent(cachedOrFallback);
+
+      const refreshed = await refreshContentFromRemote(cachedOrFallback);
+      if (!isMounted) {
+        return;
+      }
+      setContent(refreshed);
+    };
+
+    void initializeContent();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (Platform.OS !== "android") {
@@ -55,15 +85,31 @@ export default function App() {
       case "home":
         return <HomeScreen onNavigate={setCurrentView} />;
       case "universidad":
-        return <UniversidadScreen onBack={() => setCurrentView("home")} />;
+        return (
+          <UniversidadScreen
+            onBack={() => setCurrentView("home")}
+            testimonios={content.testimonios}
+          />
+        );
       case "carrera":
         return <CarreraScreen onBack={() => setCurrentView("home")} />;
       case "test":
         return <TestVocacionalScreen onBack={() => setCurrentView("home")} />;
       case "mentorias":
-        return <MentoriasScreen onBack={() => setCurrentView("home")} />;
+        return (
+          <MentoriasScreen
+            onBack={() => setCurrentView("home")}
+            whatsappGroupLink={content.whatsappLink}
+            mentores={content.mentores}
+          />
+        );
       case "faq":
-        return <FAQScreen onBack={() => setCurrentView("home")} />;
+        return (
+          <FAQScreen
+            onBack={() => setCurrentView("home")}
+            faqs={content.preguntasFrecuentes}
+          />
+        );
       default:
         return <HomeScreen onNavigate={setCurrentView} />;
     }

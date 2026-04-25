@@ -23,7 +23,7 @@ const areas = [
 const opportunities = [
   [
     "Desarrollador de Software",
-    "Creacion de aplicaciones web, móviles y de escritorio",
+    "Creación de aplicaciones web, móviles y de escritorio",
   ],
   ["Arquitecto de Software", "Diseño de soluciones tecnológicas escalables"],
   ["Ingeniero de Datos", "Gestión y análisis de información"],
@@ -52,7 +52,7 @@ export function CarreraScreen({ onBack }: Props) {
         </View>
 
         <View style={styles.softCard}>
-          <Text style={styles.softTitle}>Duracion</Text>
+          <Text style={styles.softTitle}>Duración</Text>
           <Text style={styles.softText}>
             4 años de formacion intensiva combinando teoría y práctica.
           </Text>
@@ -75,7 +75,7 @@ export function CarreraScreen({ onBack }: Props) {
             subjects={[
               "Matemática Discreta",
               "Álgebra",
-              "Introduccion a la Programación",
+              "Introducción a la Programación",
               "Introducción a la Ingeniería",
             ]}
             color="#dbeafe"

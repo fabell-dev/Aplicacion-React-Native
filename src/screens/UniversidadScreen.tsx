@@ -19,10 +19,24 @@ import {
   Music,
   UtensilsCrossed,
 } from "lucide-react-native";
+import type { Testimonio } from "../types";
 
-type Props = { onBack: () => void };
+type Props = { onBack: () => void; testimonios: Testimonio[] };
 
-export function UniversidadScreen({ onBack }: Props) {
+function formatAcademicYear(year: number): string {
+  if (year === 1) {
+    return "1er Año";
+  }
+  if (year === 2) {
+    return "2do Año";
+  }
+  if (year === 3) {
+    return "3er Año";
+  }
+  return `${year}to Año`;
+}
+
+export function UniversidadScreen({ onBack, testimonios }: Props) {
   const [activeTab, setActiveTab] = useState<UniversityTab>("info");
 
   return (
@@ -55,7 +69,9 @@ export function UniversidadScreen({ onBack }: Props) {
       <ScrollView contentContainerStyle={styles.content}>
         {activeTab === "info" && <InfoContent />}
         {activeTab === "vida" && <VidaContent />}
-        {activeTab === "testimonios" && <TestimoniosContent />}
+        {activeTab === "testimonios" && (
+          <TestimoniosContent testimonios={testimonios} />
+        )}
       </ScrollView>
     </View>
   );
@@ -101,8 +117,8 @@ function InfoContent() {
 
       <View style={styles.softCard}>
         <Text style={styles.softTitle}>Datos Clave</Text>
-        <InfoItem label="Ubicacion" value="La Habana, Cuba" />
-        <InfoItem label="Fundacion" value="2002" />
+        <InfoItem label="Ubicación" value="La Habana, Cuba" />
+        <InfoItem label="Fundación" value="2002" />
         <InfoItem label="Modelo" value="Universidad-Empresa" />
         <InfoItem label="Especialidad" value="Ciencias Informáticas" />
       </View>
@@ -161,7 +177,7 @@ function VidaContent() {
 
       <SectionCard
         title="Vida en el Campus"
-        description="Conoce nuestra ciudad tecnologica de avanzada con mas de 268 hectareas."
+        description="Conoce nuestra ciudad tecnológica de avanzada con mas de 268 hectáreas."
         icon="building"
         onPress={() => setSelectedSection("campus")}
       />
@@ -172,20 +188,20 @@ function VidaContent() {
         onPress={() => setSelectedSection("residencia")}
       />
       <SectionCard
-        title="Deportes y Recreacion"
+        title="Deportes y Recreación"
         description="Instalaciones y actividades para promover estilos de vida saludable."
         icon="zap"
         onPress={() => setSelectedSection("deportes")}
       />
       <SectionCard
         title="Actividades Culturales"
-        description="Fuerte movimiento artistico con reconocimientos a nivel nacional."
+        description="Fuerte movimiento artístico con reconocimientos a nivel nacional."
         icon="music"
         onPress={() => setSelectedSection("cultura")}
       />
       <SectionCard
         title="Comedores"
-        description="Servicios de alimentacion con menus variados y nutritivos."
+        description="Servicios de alimentación con menús variados y nutritivos."
         icon="utensils"
         onPress={() => setSelectedSection("comedores")}
       />
@@ -282,36 +298,36 @@ function getCampusDetail(section: CampusSection) {
       return {
         title: "Vida en el Campus",
         paragraphs: [
-          "Nuestro campus constituye una ciudad tecnologica de avanzada distribuida en 268 hectareas, con una potente red de datos y una amplia infraestructura que garantiza la realizacion de todos los procesos sustantivos de la Universidad.",
-          "Contamos con 6 edificios que acogen 150 aulas, 30 salones de conferencia y mas de 200 laboratorios destinados a las actividades docente-productivas de las diferentes facultades.",
-          "Todos los espacios cuentan con puntos de acceso a la red de datos, sistema de television por cable, climatizacion mediante aire acondicionado o ventiladores, comunicacion telefonica y agua potable.",
+          "Nuestro campus constituye una ciudad tecnológica de avanzada distribuida en 268 hectáreas, con una potente red de datos y una amplia infraestructura que garantiza la realización de todos los procesos sustantivos de la Universidad.",
+          "Contamos con 6 edificios que acogen 150 aulas, 30 salones de conferencia y más de 200 laboratorios destinados a las actividades docente-productivas de las diferentes facultades.",
+          "Todos los espacios cuentan con puntos de acceso a la red de datos, sistema de televisión por cable, climatización mediante aire acondicionado o ventiladores, comunicación telefónica y agua potable.",
         ],
       };
     case "residencia":
       return {
         title: "Residencia Estudiantil",
         paragraphs: [
-          "La residencia ocupa un lugar importante dentro del area de la Universidad. Sus edificios y apartamentos dan la bienvenida a estudiantes y profesores, y funcionan como un espacio socialmente educativo y socializante.",
-          "Dentro del campus se ofrecen otros servicios como cafeterias, pizzerias, correos, bancos, barberia, peluqueria, salon de belleza, areas deportivas, tienda y lavanderia.",
-          "La labor educativa en este contexto incluye a profesores, lideres estudiantiles y academicos para contribuir a la formacion integral de los alumnos.",
+          "La residencia ocupa un lugar importante dentro del área de la Universidad. Sus edificios y apartamentos dan la bienvenida a estudiantes y profesores, y funcionan como un espacio socialmente educativo y socializante.",
+          "Dentro del campus se ofrecen otros servicios como cafeterías, pizzerías, correos, bancos, barbería, peluqueria, salón de belleza, áreas deportivas, tienda y lavandería.",
+          "La labor educativa en este contexto incluye a profesores, líderes estudiantiles y académicos para contribuir a la formación integral de los alumnos.",
         ],
       };
     case "deportes":
       return {
         title: "Deportes y Recreacion",
         paragraphs: [
-          "El deporte permite promover acciones practicas para consolidar el desarrollo integral de estudiantes, profesores y trabajadores, fomentando estilos de vida saludable.",
+          "El deporte permite promover acciones prácticas para consolidar el desarrollo integral de estudiantes, profesores y trabajadores, fomentando estilos de vida saludable.",
           "La Universidad dispone de infraestructura para futsal, balonmano, baloncesto, voleibol, beisbol, atletismo, futbol, taekwondo, karate, kenpo, judo y lucha libre entre otras disciplinas.",
-          "Uno de los momentos mas esperados son los Juegos Deportivos Mella, ademas de eventos como Marhabana, Maracuba, la Carrera Terry Fox, Dia Olimpico y el Maraton 10 de Octubre.",
+          "Uno de los momentos mas esperados son los Juegos Deportivos Mella, ademas de eventos como Marhabana, Maracuba, la Carrera Terry Fox, Dia Olímpico y el Maratán 10 de Octubre.",
         ],
       };
     case "cultura":
       return {
         title: "Actividades Culturales",
         paragraphs: [
-          "La institucion se caracteriza por un fuerte movimiento artistico integrado por estudiantes y trabajadores, con reconocimientos a nivel nacional.",
-          "La actividad cultural se organiza desde la Vicerrectoria de Extension Universitaria, con apoyo de organizaciones juveniles y estudiantiles.",
-          "El Centro Cultural Wifredo Lam dispone de aulas para teatro, danza, musica y artes plasticas, ademas de sala de video, galeria, libreria, complejo recreativo, plazas y teatro.",
+          "La institución se caracteriza por un fuerte movimiento artístico integrado por estudiantes y trabajadores, con reconocimientos a nivel nacional.",
+          "La actividad cultural se organiza desde la Vicerrectoria de Extensión Universitaria, con apoyo de organizaciones juveníles y estudiantiles.",
+          "El Centro Cultural Wifredo Lam dispone de aulas para teatro, danza, música y artes plásticas, además de sala de video, galería, librería, complejo recreativo, plazas y teatro.",
         ],
       };
     case "comedores":
@@ -341,33 +357,8 @@ function ScheduleRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-function TestimoniosContent() {
-  const data = [
-    [
-      "Maria Gonzalez",
-      "3er Año",
-      "Experiencia única en proyectos reales.",
-      "#3b82f6",
-    ],
-    [
-      "Carlos Rodriguez",
-      "4to Año",
-      "Ambiente increible y aprendizaje continuo.",
-      "#4f46e5",
-    ],
-    [
-      "Ana Martinez",
-      "4to Año",
-      "Preparación para retos profesionales.",
-      "#7c3aed",
-    ],
-    [
-      "Jorge Lopez",
-      "2do Año",
-      "Vida en campus activa y enriquecedora.",
-      "#16a34a",
-    ],
-  ];
+function TestimoniosContent({ testimonios }: { testimonios: Testimonio[] }) {
+  const colors = ["#3b82f6", "#4f46e5", "#7c3aed", "#16a34a", "#ea580c"];
 
   return (
     <>
@@ -379,14 +370,19 @@ function TestimoniosContent() {
           Conoce experiencias de quienes ya estudian en la UCI.
         </Text>
       </View>
-      {data.map(([name, year, text, color]) => (
+      {testimonios.map((item, index) => (
         <View
-          key={name}
-          style={[styles.testimonialCard, { borderLeftColor: color as string }]}
+          key={`${item.nombre_alumno}-${index}`}
+          style={[
+            styles.testimonialCard,
+            { borderLeftColor: colors[index % colors.length] },
+          ]}
         >
-          <Text style={styles.testimonialName}>{name}</Text>
-          <Text style={styles.testimonialYear}>{year}</Text>
-          <Text style={styles.testimonialText}>"{text}"</Text>
+          <Text style={styles.testimonialName}>{item.nombre_alumno}</Text>
+          <Text style={styles.testimonialYear}>
+            {formatAcademicYear(item.anno_academico)}
+          </Text>
+          <Text style={styles.testimonialText}>"{item.texto}"</Text>
         </View>
       ))}
     </>

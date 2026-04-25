@@ -67,7 +67,7 @@ export function HomeScreen({ onNavigate }: HomeProps) {
       >
         <View style={styles.headerOverlay} />
         <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>Orientacion ICI</Text>
+          <Text style={styles.headerTitle}>Orientación ICI</Text>
           <Text style={styles.headerSubtitle}>
             Tu guía hacia la Ingeniería en Ciencias Informáticas
           </Text>

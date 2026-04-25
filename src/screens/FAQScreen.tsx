@@ -8,69 +8,11 @@ import {
   Text,
   View,
 } from "react-native";
+import type { PreguntaFrecuente } from "../types";
 
-type Props = { onBack: () => void };
+type Props = { onBack: () => void; faqs: PreguntaFrecuente[] };
 
-type FAQItem = {
-  question: string;
-  answer: string;
-};
-
-const faqData: FAQItem[] = [
-  {
-    question: "¿Que es la carrera de Ingenieria en Ciencias Informáticas?",
-    answer:
-      "Es una carrera universitaria que forma profesionales en el desarrollo de software, sistemas informáticos y soluciones tecnológicas. En la UCI, la carrera tiene un fuerte enfoque práctico con trabajo en proyectos reales desde los primeros años.",
-  },
-  {
-    question: "¿Que asignaturas voy a estudiar?",
-    answer:
-      "Estudiaras matemáticas, programación, bases de datos, redes, ingeniería de software, inteligencia artificial, desarrollo web y móvil, entre otras. Las asignaturas combinan teoria con práctica en proyectos productivos.",
-  },
-  {
-    question: "¿Necesito saber programar antes de entrar?",
-    answer:
-      "No es necesario tener conocimientos previos de programación. La carrera comienza desde cero y te enseña todo lo necesario paso a paso. Lo importante es tener interés, lógica y ganas de aprender.",
-  },
-  {
-    question: "¿Cuánto dura la carrera?",
-    answer:
-      "La carrera tiene una duracion de 4 años, divididos en 8 semestres. Durante este tiempo combinaras clases teóricas con trabajo en proyectos productivos de la universidad.",
-  },
-  {
-    question: "¿Como es la vida estudiantil en la UCI?",
-    answer:
-      "La UCI ofrece residencia estudiantil, actividades deportivas, culturales y recreativas. Cuenta con instalaciones modernas, comedores, áreas de estudio y espacios para el desarrollo personal y profesional de los estudiantes.",
-  },
-  {
-    question: "¿Que oportunidades laborales tendre al graduarme?",
-    answer:
-      "Como ingeniero informático podrás trabajar en desarrollo de software, administración de sistemas, seguridad informática, inteligencia artificial, análisis de datos, gestión de proyectos tecnológicos, y muchas otras áreas del sector IT.",
-  },
-  {
-    question:
-      "¿La UCI tiene convenios con empresas o universidades internacionales?",
-    answer:
-      "Si, la UCI mantiene convenios con múltiples empresas tecnológicas e instituciones educativas internacionales. Esto permite intercambios académicos, proyectos colaborativos y oportunidades de certificación internacional.",
-  },
-  {
-    question: "¿Puedo trabajar mientras estudio?",
-    answer:
-      "A partir del tercer año, los estudiantes participan en proyectos productivos de la universidad como parte de su formación, donde adquieren experiencia práctica real mientras estudian. Además, algunos estudiantes destacados pueden realizar prácticas en empresas.",
-  },
-  {
-    question: "¿Que requisitos de entrada tiene la carrera?",
-    answer:
-      "Debes aprobar los exámenes de ingreso establecidos por el Ministerio de Educación Superior de Cuba, con enfásis en Matemática, Español e Historia. También se considera tu índice académico de preuniversitario.",
-  },
-  {
-    question: "¿La carrera es muy difícil?",
-    answer:
-      "Como cualquier carrera universitaria, requiere dedicación y esfuerzo. Las matemáticas y la lógica son fundamentales, pero con disciplina, apoyo de profesores y compañeros, y aprovechando los recursos disponibles, es totalmente alcanzable. La clave esta en la constancia y el ínteres por aprender.",
-  },
-];
-
-export function FAQScreen({ onBack }: Props) {
+export function FAQScreen({ onBack, faqs }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
@@ -106,7 +48,7 @@ export function FAQScreen({ onBack }: Props) {
         </View>
 
         <View style={styles.itemsWrap}>
-          {faqData.map((item, index) => {
+          {faqs.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <View key={index} style={styles.faqCard}>
@@ -114,14 +56,14 @@ export function FAQScreen({ onBack }: Props) {
                   onPress={() => toggleQuestion(index)}
                   style={styles.questionButton}
                 >
-                  <Text style={styles.questionText}>{item.question}</Text>
+                  <Text style={styles.questionText}>{item.pregunta}</Text>
                   <Text style={[styles.chevron, isOpen && styles.chevronOpen]}>
                     ⌄
                   </Text>
                 </Pressable>
                 {isOpen ? (
                   <View style={styles.answerWrap}>
-                    <Text style={styles.answerText}>{item.answer}</Text>
+                    <Text style={styles.answerText}>{item.respuesta}</Text>
                   </View>
                 ) : null}
               </View>
